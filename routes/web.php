@@ -1,20 +1,15 @@
 <?php
-<<<<<<< Updated upstream
 
-=======
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\GoogleController;
->>>>>>> Stashed changes
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
-<<<<<<< Updated upstream
-=======
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -36,4 +31,3 @@ require __DIR__.'/auth.php';
 Route::get('/auth/google/redirect', [GoogleController::class, 'redirect'])->name('auth.google.redirect');
 Route::get('/auth/google/callback', [GoogleController::class, 'callback']);
 
->>>>>>> Stashed changes

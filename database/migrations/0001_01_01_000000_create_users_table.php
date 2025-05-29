@@ -36,9 +36,9 @@ return new class extends Migration
             $table->integer('last_activity')->index();
         });
 
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('google_id')->nullable();
-        });
+        // Schema::table('users', function (Blueprint $table) {
+        //     $table->string('google_id')->nullable();
+        // });
     }
 
     /**

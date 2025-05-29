@@ -30,7 +30,8 @@
 </head>
 
 <body class="bg-gradient-to-r from-indigo-900/75 to-blue-600/75 text-gray-900 font-sans mx-4">
-    <div class="bg-white/70 w-fit mx-auto mt-10 p-1 rounded-lg shadow-2xl fade-in dafe-delay-1"> <!-- Pembungkus Tengah -->
+  <div class="h-screen flex flex-col justify-center items-center">
+    <div class="bg-white/70 w-fit mx-auto my-auto p-1 rounded-lg shadow-2xl fade-in dafe-delay-1"> <!-- Pembungkus Tengah -->
         <div class="flex flex-row w-auto max-w-4xl rounded-lg overflow-hidden">
             <!-- Ilustrasi Kiri -->
             <div class="hidden md:flex w-1/2 items-center justify-center p-10">
@@ -44,7 +45,7 @@
 
             <!-- Form Login -->
             <div class="w-full md:w-1/2 p-10">
-            <h2 class="text-2xl font-bold text-gray-700 mb-6">Welcome</h2>
+            <h2 class="text-2xl font-bold text-gray-700 mb-6">Welcome Back!</h2>
             <form>
                 <div class="mb-4">
                 <label class="block text-gray-700 mb-2" for="email">Email</label>
@@ -83,11 +84,12 @@
 
 
             <div class="mt-4 text-center">
-                <a href="#" class="text-sm text-gray-600">Don't have account?</a>
+                <a href="{{ route('register') }}" class="text-sm text-gray-600">Don't have account?</a>
             </div>
             </div>
         </div>
     </div>
+  </div>
 </body>
 
 </html>
