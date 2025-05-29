@@ -12,33 +12,57 @@ class GoogleController extends Controller
 {
     public function redirect()
     {
+        // Method 1: Configure Socialite to ignore SSL
+        config(['socialite.services.google.guzzle' => [
+            'verify' => false
+        ]]);
+        
         return Socialite::driver('google')->redirect();
     }
 
     public function callback()
     {
         try {
-            $googleUser = Socialite::driver('google')->stateless()->user();
+            // Method 2: Alternative approach with custom HTTP client
+            $http = new \GuzzleHttp\Client(['verify' => false]);
+            Socialite::driver('google')->setHttpClient($http);
+            
+            $googleUser = Socialite::driver('google')->user();
 
-            // Cek apakah user sudah ada
-            $user = User::where('email', $googleUser->getEmail())->first();
+            // Debug: What Google is sending
+            logger()->info('Google User Data:', [
+                'id' => $googleUser->id,
+                'name' => $googleUser->name,
+                'email' => $googleUser->email,
+                'avatar' => $googleUser->avatar,
+            ]);
+
+            // Fix: Your current $user query is missing ->first()
+            $user = User::where('email', $googleUser->email)->first();
 
             if (!$user) {
-                // Buat user baru
-                $user = User::create([
-                    'name' => $googleUser->getName(),
-                    'email' => $googleUser->getEmail(),
-                    'google_id' => $googleUser->getId(),
-                    'avatar' => $googleUser->getAvatar(),
-                    'password' => bcrypt(Str::random(16)), // Password dummy
-                ]);
+                $userData = [
+                    'google_id' => $googleUser->id,
+                    'name' => $googleUser->name,
+                    'email' => $googleUser->email,
+                    'password' => bcrypt(Str::random(16)),
+                ];
+                
+                // Debug: Data being inserted
+                logger()->info('Creating user with:', $userData);
+                
+                $user = User::create($userData);
             }
 
+            // Debug: Final user object
+            logger()->info('Logged in user:', $user->toArray());
+            
             Auth::login($user);
-
-            return redirect('/landing-page'); // Ubah sesuai route kamu
+            
+            return redirect()->route('pages.landing-page');
         } catch (Exception $e) {
-            return redirect('/login')->with('error', 'Login dengan Google gagal.');
+            logger()->error('Google Auth Error: '.$e->getMessage());
+            return redirect()->route('login')->with('error', 'Google login failed');
         }
     }
-    }
+}

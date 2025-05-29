@@ -35,5 +35,5 @@ require __DIR__.'/auth.php';
 
 
 Route::get('/auth/google/redirect', [GoogleController::class, 'redirect'])->name('auth.google.redirect');
-Route::get('/auth/google/callback', [GoogleController::class, 'callback']);
+Route::get('/auth/google/callback', [GoogleController::class, 'callback'])->name('auth.google.callback');
 
