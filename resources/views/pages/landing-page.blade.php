@@ -52,7 +52,13 @@
       <button class="bg-white px-6 py-3 rounded-full hover:bg-indigo-900 hover:text-white transition hover:cursor-pointer">About Us</button>
     </div>
 
-    <button class="bg-indigo-900 text-white px-6 py-3 rounded-full hover:cursor-pointer">Profile</button>
+    <div class="flex flex-row gap-3">
+      <button class="bg-indigo-900 text-white px-6 py-3 rounded-full hover:cursor-pointer">Profile</button>
+      <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit" class="bg-red-700 text-white px-6 py-3 rounded-full hover:cursor-pointer">Logout</button>
+      </form>
+      </div>
   </nav>
 
   <!-- Hero Image -->
