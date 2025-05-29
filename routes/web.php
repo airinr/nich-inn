@@ -12,7 +12,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('pages.landing-page');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -21,9 +21,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/landing-page', function () {
-    return view('pages.landing-page');
-})->name('landing-page');
+// Route::get('/landing-page', function () {
+//     return view('pages.landing-page');
+// })->name('landing-page');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/landing-page', function () {
+        return view('pages.landing-page');
+    })->name('landing-page');
+});
 
 require __DIR__.'/auth.php';
 

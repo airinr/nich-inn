@@ -46,11 +46,13 @@
             <!-- Form Login -->
             <div class="w-full md:w-1/2 p-10">
             <h2 class="text-2xl font-bold text-gray-700 mb-6">Welcome Back!</h2>
-            <form>
+            <form method="POST" action="{{ route('login') }}">
+              @csrf
                 <div class="mb-4">
                 <label class="block text-gray-700 mb-2" for="email">Email</label>
                 <input
                     type="email"
+                    name="email"
                     id="email"
                     placeholder="example@gmail.com"
                     class="w-full px-4 py-2 border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-indigo-900"
@@ -60,6 +62,7 @@
                 <label class="block text-gray-700 mb-2" for="password">Password</label>
                 <input
                     type="password"
+                    name="password"
                     id="password"
                     placeholder="********"
                     class="w-full px-4 py-2 border border-gray-500 rounded focus:outline-none focus:ring-2 focus:ring-indigo-900"
